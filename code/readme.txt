@@ -1,0 +1,5 @@
+docker compose up --build [to start the docker]
+docker compose down -v    [to delete all the docker relevant files and network]
+http://localhost:8080/goals [wesite url for api]
+http://localhost:3000       [website url for ui]
+docker system prune -a --volumes -f [to be run in powershell to freeup virtual disk space]

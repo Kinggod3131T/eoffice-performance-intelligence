@@ -1,0 +1,38 @@
+services:
+  postgres:
+    image: postgres:15
+    container_name: pms_postgres
+    restart: always
+    environment:
+      POSTGRES_USER: pmsuser
+      POSTGRES_PASSWORD: pmspassword
+      POSTGRES_DB: pmsdb
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  backend:
+    build: ./backend
+    container_name: pms_backend
+    depends_on:
+      - postgres
+    environment:
+      DB_HOST: postgres
+      DB_PORT: 5432
+      DB_USER: pmsuser
+      DB_PASSWORD: pmspassword
+      DB_NAME: pmsdb
+    ports:
+      - "8080:8080"
+
+  frontend:
+    build: ./frontend
+    container_name: pms_frontend
+    depends_on:
+      - backend
+    ports:
+      - "3000:3000"
+
+volumes:
+  pgdata:

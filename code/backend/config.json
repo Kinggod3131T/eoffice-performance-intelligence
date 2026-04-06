@@ -1,0 +1,6 @@
+{
+  "database": {
+    "type": "postgres", 
+    "sqlite_path": "./data/goals.db"  
+  }
+}
